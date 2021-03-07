@@ -10,6 +10,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:deception_app/counter/counter.dart';
 import 'package:deception_app/l10n/l10n.dart';
 
+import 'deception_colors.dart';
+
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
@@ -17,9 +19,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        accentColor: const Color(0xFF13B9FF),
-        appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
-      ),
+          accentColor: deceptionRedColor,
+          appBarTheme: const AppBarTheme(color: deceptionBlueColor),
+          brightness: Brightness.dark),
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
