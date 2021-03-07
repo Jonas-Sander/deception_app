@@ -11,8 +11,12 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  auto_size_text_field: ^1.0.0-nullsafety.1
   bloc: ^7.0.0-nullsafety.3
+  build_context: ^2.0.4
+  email_validator: ^2.0.0-nullsafety 
   flutter_bloc: ^7.0.0-nullsafety.3
+  google_fonts: ^2.0.0
   intl: ^0.17.0
 
 dev_dependencies:

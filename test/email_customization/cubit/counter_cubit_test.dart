@@ -7,7 +7,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:deception_app/counter/counter.dart';
+import 'package:deception_app/email_customization/email_customization.dart';
 
 void main() {
   group('CounterCubit', () {
