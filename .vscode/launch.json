@@ -5,6 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Launch development (macOS)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main_development.dart",
+      "args": [
+        // "--flavor",
+        // "Runner",
+        "--target",
+        "lib/main_development.dart"
+      ]
+    },
+    {
       "name": "Launch development",
       "request": "launch",
       "type": "dart",
