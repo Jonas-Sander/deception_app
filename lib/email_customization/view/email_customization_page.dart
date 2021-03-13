@@ -6,6 +6,7 @@
 // https://opensource.org/licenses/MIT.
 
 import 'package:deception_app/app/deception_colors.dart';
+import 'package:deception_app/email_customization/use_case/update_email_use_case.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,6 +29,11 @@ class CounterPage extends StatelessWidget {
   }
 }
 
+String deceptionEmail = '';
+String privateEmail = '';
+UpdateEmailUseCase updateEmailUseCase =
+    UpdateEmailUseCase(CloudflareApi('7a452090b40b4d55e60bf6c4e28144b4'));
+
 class CounterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -43,7 +49,7 @@ class CounterView extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Text(
-                    'Haunt',
+                    'xXMustermannXx',
                     style: GoogleFonts.raleway(
                       textStyle: Theme.of(context)
                           .textTheme
@@ -75,24 +81,33 @@ class CounterView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   EmailTextField(),
-                  Opacity(opacity: 0.3, child: EmailTextField()),
+                  // Opacity(opacity: 0.3, child: EmailTextField()),
+                  const SizedBox(height: 50),
+                  PersonalEmailTextField(),
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 50),
               Align(
-                  alignment: Alignment.centerRight,
-                  child: ElevatedButton(
-                      style: ButtonStyle(),
-                      onPressed: () {},
-                      child: Text(
-                        'AB GEHTS',
-                        style: GoogleFonts.raleway(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          fontStyle: FontStyle.italic,
-                          color: Colors.white,
-                        ),
-                      ))),
+                alignment: Alignment.centerRight,
+                child: ElevatedButton(
+                  style: ButtonStyle(),
+                  onPressed: () async {
+                    await updateEmailUseCase.updateEmails(
+                      privateEmail: privateEmail,
+                      deceptionEmail: deceptionEmail,
+                    );
+                  },
+                  child: Text(
+                    'AB GEHTS',
+                    style: GoogleFonts.raleway(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -118,15 +133,19 @@ class EmailTextField extends StatelessWidget {
           child: AutoSizeTextField(
             maxLength: 20,
             decoration: InputDecoration(
-                focusColor: Colors.white,
-                fillColor: Colors.white,
-                hoverColor: Colors.white),
+              focusColor: Colors.white,
+              fillColor: Colors.white,
+              hoverColor: Colors.white,
+            ),
             minWidth: 50,
             fullwidth: false,
             textAlign: TextAlign.end,
             controller: TextEditingController(),
             style:
                 Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 20),
+            onChanged: (newCustomPart) {
+              deceptionEmail = '$newCustomPart@deception.team';
+            },
           ),
         ),
         Flexible(
@@ -141,13 +160,27 @@ class EmailTextField extends StatelessWidget {
   }
 }
 
-class CounterText extends StatelessWidget {
-  const CounterText({Key? key}) : super(key: key);
+class PersonalEmailTextField extends StatelessWidget {
+  const PersonalEmailTextField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final count = context.select((CounterCubit cubit) => cubit.state);
-    return Text('$count', style: theme.textTheme.headline1);
+    return Container(
+      width: 350,
+      child: TextField(
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          labelText: 'Private E-Mail',
+          hintText: 'max-mustermann@gmail.com',
+          focusColor: Colors.white,
+          fillColor: Colors.white,
+          hoverColor: Colors.white,
+        ),
+        style: Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 20),
+        onChanged: (newPrivateEmail) {
+          privateEmail = newPrivateEmail;
+        },
+      ),
+    );
   }
 }
