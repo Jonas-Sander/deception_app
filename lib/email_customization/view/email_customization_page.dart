@@ -31,8 +31,10 @@ class CounterPage extends StatelessWidget {
 
 String deceptionEmail = '';
 String privateEmail = '';
-UpdateEmailUseCase updateEmailUseCase =
-    UpdateEmailUseCase(CloudflareApi('7a452090b40b4d55e60bf6c4e28144b4'));
+UpdateEmailController updateEmailUseCase = UpdateEmailController(
+    updateEmailUseCase:
+        UpdateEmailUseCase(CloudflareApi('7a452090b40b4d55e60bf6c4e28144b4')),
+    userId: UserId('placeholderId'));
 
 class CounterView extends StatelessWidget {
   @override
