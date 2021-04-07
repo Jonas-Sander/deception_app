@@ -1,5 +1,76 @@
 # Deception App
 
+Deception App
+
+Die Deception App soll für engere Mitglieder der Deception-Gruppe da sein.
+Als erste Funktionalität kann damit die eigene Deception-Email-Adresse verwaltet werden.
+Zusätzlich wäre es damit möglich sich direkt beim Passwort-Server zu authentifizieren und nicht erst einen eigenen Account erstellen zu müssen.
+
+MVP:
+1. Admin kann Einladungen erstellen für Discord-Nutzer
+2. Eingeladene Discord-Nutzer können sich einloggen/registrieren
+3. Registrierte Nutzer können sich eine eigene Deception-E-Mail für E-Mail Weiterleitungen an eine private Addresse suchen.
+- DSE?
+- Nutzernamen wählen?
+- Admin Übersicht über erstellte E-Mail-Adressen?
+
+Implizit:
+- Plattform muss zwischen Admins und "normalen" Nutzern unterscheiden können.  
+--> Admin kann man theoretisch erstmal hardcoden, in Zukunft sollte das aber am besten dynamisch auswählbar sein.
+- Endpunkte / Aktionen, welche nur von Admins ausführbar sei sollten, sollten geschützt sein.  
+--> Nur ein Admin sollte Einladungen erstellen können.
+- Endpunkte / Aktionen, welche nur von eingeloggten Nutzern ausführbar sei sollten, sollten geschützt sein.  
+--> Eine E-Mail ändern sollte man nur als eingeloggter Nutzer können.
+- Endpunkte / Aktionen, welche nur für "sich selbst" als Nutzer ausführbar sein sollten, sollten entsprechend geschützt sein.   
+--> Ein Nutzer sollte nur seine eigene E-Mail-Adresse ändern können.  
+- Es muss ein Prozess geben, um den ersten Admin-Account zu "bootstrappen". (Funktioniert das dann per Kommandozeile? Gibt es da ein cooleren weg?)
+- Ein Nutzer sollte sich wahrscheinlich ein Nickname aussuchen können. Der kann bei ersteren Login ja von Discord übernommen werden.  
+
+Infra:
+- Die Plattform soll zunächst auf meinem (Jonas) Raspberry pi 3B laufen.
+- Die Plattform soll auf Kubernetes laufen, damit man es nach belieben auf einen richtigen Hosting-Provider verschieben kann.
+- Die Plattform sollte von einer festen URL aufrufbar sein, auch wenn sich die IP des Raspberry-Pi verändert.
+- Features sollten per automatisierten Akzeptanz- und Unit-Tests implementiert werden.
+- Das Projekt sollte per TDD aufgestellt werden.
+- Das Projekt sollte architekturelle Spikes benutzen für Stellen, an denen die Architektur noch nicht sicher ist.
+- Akzeptanztests sollten (steht noch zur Debatte) per Gherkin geschrieben sein.
+- Alle Tests sollten per CI Pipeline ausgeführt werden.
+- Eine neue Version der Plattform sollte nach erfolgreichem Mergen direkt auf den Raspberry-PI deployed werden.
+- Aller Code soll Open-Source sein.
+
+
+Zukunft:
+- Nutzer sollen ihre Accounts selbst löschen können
+- Nutzer sollen die Daten ihrer Accounts selbst exportieren können
+- Eine Liste an existierenden Nutzern anzeigen (wie bei G-Suite)
+- Nutzer-Rechte dynamisch administrieren (andere Nutzer Admin machen.)
+- Nutzer als Admin von der UI löschen / editieren können.
+- Nutzer erlauben weitere Authentifizierungs-Methoden als nur Discord hinzuzufügen.
+- Nutzer erlauben sich per SSO in Bitwarden anzumelden (wird auf Deception-Seite weitergeleitet).
+- Deception-Discord-Nutzer mit Member-Rang können generell auf die Plattform, aber keine eigene E-Mail kriegen (müssen dafür zahlen?)
+
+Offene Fragen:
+- Funktioniert die Integration von Discord und Ory Kratos?
+- Funktioniert die Integration von Flutter und Ory Kratos?
+- Wie soll ich die API-Endpunkte richtig schützen? (nicht eingeloggt --> kann nichts machen, eingeloggt --> kann E-Mail ändern, eingeloggt und Admin --> Kann E-Mail ändern und Nutzer verwalten).
+- Kann ich alle Komponenten auf dem Raspberry-PI hosten?
+- Kann ich effektive Gherkin-Tests schreiben, welche:
+    1. Innerhalb des Tests zwischen Admin und normalen Nutzer wechseln (oder sind das schlechte Tests?)
+    2. Auch elemente außerhalb von Flutter benutzen? (Es öffnet sich ja der Discord Akzeptanz-Dialog, kann man das in einem Test haben?)
+- Wie kann ich aktuelle Versionen automatisch auf den Raspberry-Pi pushen? (CI-Pipeline)
+
+Spikes: 
+- Flutter Log-In in Kratos (erst per E-Mail oder direkt per Discord?)
+- Raspberry-Pi:
+    1. K3s auf Raspberry-Pi laufen lassen
+    2. Manuelle Updates per CLI-Command des K8s-Clusters
+    3. Automatische Updates per CI-Pipeline auf den Raspberry-Pi
+- Gherkin-Tests:
+    1. Einen automatisierten Gherkin-Test schreiben, der den Flutter-Prototyp benutzt/navigiert.
+    2. Gucken, ob man ein Test schreiben kann, der irgendwie den Discord-Dialog akzeptiert.
+
+# (Generated description below)
+
 [![Very Good Ventures][logo]][very_good_ventures_link]
 
 Developed with 💙 by [Very Good Ventures][very_good_ventures_link] 🦄
