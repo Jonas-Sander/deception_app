@@ -5,6 +5,7 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
+import 'package:deception_app/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:deception_app/email_customization/email_customization.dart';
@@ -28,8 +29,12 @@ class App extends StatelessWidget {
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
       ],
+      initialRoute: 'login',
+      routes: {
+        'login': (context) => const LoginPage(),
+        'email_customization': (context) => const CounterPage(),
+      },
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
     );
   }
 }
