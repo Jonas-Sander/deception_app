@@ -2,12 +2,33 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+class UpdateEmailController {
+  final UpdateEmailUseCase updateEmailUseCase;
+  final UserId userId;
+
+  UpdateEmailController({
+    required this.updateEmailUseCase,
+    required this.userId,
+  });
+
+  Future<void> updateEmails({
+    required String privateEmail,
+    required String deceptionEmail,
+  }) async {
+    return updateEmailUseCase.updateEmails(
+        userId: userId,
+        privateEmail: privateEmail,
+        deceptionEmail: deceptionEmail);
+  }
+}
+
 class UpdateEmailUseCase {
   final CloudflareApi cloudflareApi;
 
   UpdateEmailUseCase(this.cloudflareApi);
 
   Future<void> updateEmails({
+    required UserId userId,
     required String privateEmail,
     required String deceptionEmail,
   }) async {
@@ -38,6 +59,16 @@ class UpdateEmailUseCase {
       content: 'forward-email=${deceptionEmail.localPart}:$privateEmail',
       ttl: 120,
     );
+  }
+}
+
+class UserId {
+  final String id;
+
+  UserId(this.id) {
+    if (id.isEmpty) {
+      throw ArgumentError('UserId cant be an empty string');
+    }
   }
 }
 
@@ -84,6 +115,7 @@ class CloudflareApi {
     final response = await http.post(dnsRecordsUrl,
         headers: {
           'Content-Type': 'application/json',
+          // TODO: Token
           'Authorization': 'Bearer 7V1_F-H25yHxg4wY6xgtbuqCvKvy9LFgyslHt0q4',
         },
         body: body);
