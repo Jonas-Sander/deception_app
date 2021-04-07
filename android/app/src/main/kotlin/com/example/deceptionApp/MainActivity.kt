@@ -1,4 +1,4 @@
-package com.example.deceptionApp
+package team.deception.app
 
 import io.flutter.embedding.android.FlutterActivity
 
