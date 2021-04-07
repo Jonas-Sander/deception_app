@@ -32,7 +32,7 @@ class App extends StatelessWidget {
       initialRoute: 'login',
       routes: {
         'login': (context) => const LoginPage(),
-        'email_customization': (context) => const CounterPage(),
+        'email_customization': (context) => const EmailCustomizationPage(),
       },
       supportedLocales: AppLocalizations.supportedLocales,
     );

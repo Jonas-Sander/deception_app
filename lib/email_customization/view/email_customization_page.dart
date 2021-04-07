@@ -17,8 +17,8 @@ import 'package:auto_size_text_field/auto_size_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-class CounterPage extends StatelessWidget {
-  const CounterPage({Key? key}) : super(key: key);
+class EmailCustomizationPage extends StatelessWidget {
+  const EmailCustomizationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
